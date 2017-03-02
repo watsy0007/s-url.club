@@ -1,6 +1,6 @@
 root = "#{Dir.getwd}"
 
-bind "unix://#{root}/tmp/puma/socket"
+bind "tcp://0.0.0.0:3000"
 pidfile "#{root}/tmp/puma/pid"
 state_path "#{root}/tmp/puma/state"
 rackup "#{root}/config.ru"
