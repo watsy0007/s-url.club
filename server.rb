@@ -11,11 +11,16 @@ get '/' do
 end
 
 get '/:uuid' do
-  url = Url.find(uuid: params[:uuid])
-  redirect(url.empty? ? '/' : url.first.url)
+  urls = Url.find(uuid: params[:uuid])
+  redirect(urls.empty? ? '/' : urls.first.url)
 end
 
 post '/api/urls' do
-  url = params[:url]
-  Url.create(url:url, uuid: SecureRandom.uuid.delete('-')[0..11]) unless Url.exists?(url: params[:url])
+  urls = Url.find(url: params[:url])
+  url = if urls.empty?
+          Url.create(url:url, uuid: SecureRandom.uuid.delete('-')[0..11])
+        else
+          urls.first
+        end
+  "#{request.host}/#{url.uuid}"
 end
