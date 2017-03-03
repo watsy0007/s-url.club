@@ -18,9 +18,9 @@ end
 post '/api/urls' do
   urls = Url.find(url: params[:url])
   url = if urls.empty?
-          Url.create(url: prams[:url], uuid: SecureRandom.uuid.delete('-')[0..11])
+          Url.create(url: params[:url], uuid: SecureRandom.uuid.delete('-')[0..11])
         else
           urls.first
         end
-  "#{request.host}/#{url.uuid}"
+  "#{request.scheme}://#{request.host}/#{url.uuid}"
 end
