@@ -7,7 +7,7 @@ configure { set :server, :puma }
 Ohm.redis = Redic.new(ENV['REDIS_URL'])
 
 get '/' do
-  'short urls!'
+  'curl -X POST -F "url=http://google.com" "http://s-url.club/api/urls"'
 end
 
 get '/:uuid' do
