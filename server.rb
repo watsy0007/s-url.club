@@ -22,5 +22,5 @@ post '/api/urls' do
         else
           urls.first
         end
-  "#{request.scheme}://#{request.host}/#{url.uuid}"
+  "http://#{request.host}/#{url.uuid}"
 end
